@@ -1,58 +1,49 @@
-const canvas = document.getElementById('matrix-canvas');
-const ctx = canvas.getContext('2d');
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
-const fontSize = 16;
-const columns = canvas.width / fontSize;
-const drops = Array(Math.floor(columns)).fill(1);
-
-function drawMatrix() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#0F0"; // Matrix Green
-    ctx.font = fontSize + "px arial";
-
-    for (let i = 0; i < drops.length; i++) {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-    }
+body, html {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background-color: black; color: #ff0000;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
 }
 
-function initiateHack() {
-    document.getElementById('overlay').style.display = 'none';
-    document.getElementById('main-ui').style.display = 'flex';
-    
-    // Request Fullscreen
-    if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-    }
+#matrix-canvas { position: absolute; top: 0; left: 0; z-index: 1; opacity: 0.3; }
 
-    // Start Matrix Background
-    setInterval(drawMatrix, 33);
-
-    // Vibration (if mobile)
-    if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 300]);
-
-    // Timer Logic
-    let timeLeft = 60;
-    const timerElem = document.getElementById('countdown');
-    const countdownInterval = setInterval(() => {
-        timeLeft--;
-        timerElem.innerText = timeLeft;
-        if (timeLeft <= 0) {
-            clearInterval(countdownInterval);
-            alert("TOTAL SYSTEM OVERRIDE COMPLETE. DATA DELETED.");
-            window.location.reload();
-        }
-    }, 1000);
+#overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.98); z-index: 100;
+    display: flex; justify-content: center; align-items: center; cursor: pointer;
 }
 
-// Disable Back Button / Exit
-window.onbeforeunload = function() {
-    return "Malware detected! Leaving will crash your Android OS.";
-};
+.launch-btn {
+    border: 2px solid #ff0000; padding: 20px; font-size: 1.2rem;
+    box-shadow: 0 0 20px #ff0000; animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse { from { opacity: 1; } to { opacity: 0.4; } }
+
+#main-ui {
+    position: relative; z-index: 10; display: none;
+    flex-direction: column; justify-content: center; align-items: center; height: 100vh;
+}
+
+/* Screen Shake Effect */
+.shake { animation: shake 0.1s infinite; }
+@keyframes shake {
+    0% { transform: translate(1px, 1px); }
+    50% { transform: translate(-2px, -1px); }
+    100% { transform: translate(1px, 1px); }
+}
+
+.warning-header { font-size: 1.5rem; font-weight: bold; text-shadow: 0 0 10px red; }
+
+#countdown {
+    font-size: 5rem; border: 3px solid red; padding: 10px 30px;
+    margin: 15px; background: rgba(255, 0, 0, 0.1);
+}
+
+.status-box {
+    text-align: left; width: 85%; max-width: 450px;
+    background: rgba(0,0,0,0.85); border-left: 3px solid red; padding: 15px; font-size: 0.8rem;
+}
+
+.status { color: #00ff00; font-weight: bold; float: right; }
+.footer-msg { margin-top: 20px; font-size: 0.7rem; letter-spacing: 1px; color: gray; }
