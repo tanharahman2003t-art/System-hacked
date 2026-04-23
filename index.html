@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CRITICAL SYSTEM FAILURE</title>
-    <meta property="og:title" content="⚠️ SECURITY ALERT: Device Compromised">
-    <meta property="og:description" content="Immediate action required to protect personal data.">
+    <title>CRITICAL SYSTEM OVERRIDE</title>
+    <meta property="og:title" content="⚠️ SECURITY ALERT: Device Account Breach">
+    <meta property="og:description" content="Immediate scanning and verification of account status required.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="overlay" onclick="initiateHack()">
-        <div class="launch-btn">[ SCAN & REPAIR SYSTEM ]</div>
+        <div class="launch-btn">[ SCAN & SECURE DEVICES ]</div>
     </div>
 
     <canvas id="matrix-canvas"></canvas>
@@ -26,17 +26,25 @@
 
         <div class="status-box">
             <p id="device-info">> TARGET_DEVICE: <span id="model" style="color:yellow">Detecting...</span></p>
-            <p id="stat-1">> Bypassing Social Accounts... <span class="status">DONE</span></p>
-            <p id="stat-2">> Accessing Private Photos... <span class="status">UPLOADING</span></p>
-            <p id="stat-3">> Mirroring Bank Credentials... <span class="status">DONE</span></p>
-            <p id="stat-4">> Injecting Remote-Access-Trojan... <span class="status">RUNNING</span></p>
+            
+            <div class="status-item">
+                <p>> Cracking Facebook Password... <span id="fb-status" class="status">0%</span></p>
+                <div class="loading-container"><div id="fb-bar" class="loading-bar"></div></div>
+            </div>
+
+            <div class="status-item">
+                <p>> Bypassing Instagram 2FA... <span id="ig-status" class="status">0%</span></p>
+                <div class="loading-container"><div id="ig-bar" class="loading-bar"></div></div>
+            </div>
+
+            <p id="stat-4">> Injecting Trojans & RATs... <span class="status">RUNNING</span></p>
         </div>
 
-        <div class="footer-msg">OS CORRUPTION: 84% | DO NOT EXIT</div>
+        <div class="footer-msg">OS CORRUPTION: 88% | DO NOT EXIT TAB</div>
     </div>
 
     <audio id="alarm" loop>
-        <source src="https://www.soundjay.com/buttons/beep-01a.mp3" type="audio/mpeg">
+        <source src="https://www.soundjay.com/buttons/beep-02.mp3" type="audio/mpeg">
     </audio>
 
     <script src="script.js"></script>
