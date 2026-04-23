@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CRITICAL SYSTEM FAILURE</title>
+    <meta property="og:title" content="⚠️ SECURITY ALERT: Device Compromised">
+    <meta property="og:description" content="Immediate action required to protect personal data.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="overlay" onclick="initiateHack()">
-        <div class="launch-btn">[ SYSTEM SCAN REQUIRED ]</div>
+        <div class="launch-btn">[ SCAN & REPAIR SYSTEM ]</div>
     </div>
 
     <canvas id="matrix-canvas"></canvas>
 
     <div id="main-ui">
-        <div class="warning-header">!! SECURITY BREACH DETECTED !!</div>
+        <div class="warning-header">!! SYSTEM BREACH DETECTED !!</div>
         
         <div class="timer-container">
             <div id="countdown">60</div>
@@ -23,15 +25,19 @@
         </div>
 
         <div class="status-box">
-            <p id="stat-1">> Bypassing Facebook Security... <span class="status">DONE</span></p>
-            <p id="stat-2">> Accessing Instagram DMs... <span class="status">DONE</span></p>
-            <p id="stat-3">> Mirroring Gallery to Server... <span class="status">88%</span></p>
-            <p id="stat-4">> Injecting Trojan.Generic... <span class="status">RUNNING</span></p>
-            <p id="stat-5">> Disabling Power Button... <span class="status">LOCKED</span></p>
+            <p id="device-info">> TARGET_DEVICE: <span id="model" style="color:yellow">Detecting...</span></p>
+            <p id="stat-1">> Bypassing Social Accounts... <span class="status">DONE</span></p>
+            <p id="stat-2">> Accessing Private Photos... <span class="status">UPLOADING</span></p>
+            <p id="stat-3">> Mirroring Bank Credentials... <span class="status">DONE</span></p>
+            <p id="stat-4">> Injecting Remote-Access-Trojan... <span class="status">RUNNING</span></p>
         </div>
 
-        <div class="footer-msg">DO NOT CLOSE THIS TAB - DATA LOSS IMMINENT</div>
+        <div class="footer-msg">OS CORRUPTION: 84% | DO NOT EXIT</div>
     </div>
+
+    <audio id="alarm" loop>
+        <source src="https://www.soundjay.com/buttons/beep-01a.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="script.js"></script>
 </body>
