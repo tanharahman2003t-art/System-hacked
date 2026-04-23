@@ -3,135 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SECURITY BREACH: CRITICAL</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #ff0000;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .header {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            animation: pulse 0.5s infinite alternate;
-        }
-
-        @keyframes pulse {
-            from { transform: scale(1); text-shadow: 0 0 10px red; }
-            to { transform: scale(1.05); text-shadow: 0 0 20px red; }
-        }
-
-        #timer-box {
-            font-size: 4rem;
-            background: #111;
-            padding: 20px;
-            border: 2px solid red;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-        }
-
-        .status-list {
-            text-align: left;
-            width: 80%;
-            max-width: 400px;
-            font-size: 0.9rem;
-            color: #00ff00;
-        }
-
-        .status-item {
-            margin: 10px 0;
-            display: none; /* Hidden initially */
-        }
-
-        .hacked {
-            color: red;
-            font-weight: bold;
-            float: right;
-        }
-
-        #overlay-btn {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-    </style>
+    <title>CRITICAL SYSTEM FAILURE</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="overlay-btn" onclick="startHack()">
-        [ CLICK TO SCAN SYSTEM ]
+    <div id="overlay" onclick="initiateHack()">
+        <div class="launch-btn">[ SYSTEM SCAN REQUIRED ]</div>
     </div>
 
-    <div class="header">System Breach Detected!</div>
-    <p>All your mobile information is about to be hacked.</p>
-    
-    <div id="timer-box">60</div>
-    <p>Seconds left until data wipe...</p>
+    <canvas id="matrix-canvas"></canvas>
 
-    <div class="status-list">
-        <div id="s1" class="status-item">Facebook Status: <span class="hacked">HACKED [100%]</span></div>
-        <div id="s2" class="status-item">Instagram Status: <span class="hacked">ACCESS GRANTED</span></div>
-        <div id="s3" class="status-item">Photos & Gallery: <span class="hacked">UPLOADING...</span></div>
-        <div id="s4" class="status-item">Bank Info: <span class="hacked">BYPASSING...</span></div>
+    <div id="main-ui">
+        <div class="warning-header">!! SECURITY BREACH DETECTED !!</div>
+        
+        <div class="timer-container">
+            <div id="countdown">60</div>
+            <p>SECONDS UNTIL TOTAL DATA WIPE</p>
+        </div>
+
+        <div class="status-box">
+            <p id="stat-1">> Bypassing Facebook Security... <span class="status">DONE</span></p>
+            <p id="stat-2">> Accessing Instagram DMs... <span class="status">DONE</span></p>
+            <p id="stat-3">> Mirroring Gallery to Server... <span class="status">88%</span></p>
+            <p id="stat-4">> Injecting Trojan.Generic... <span class="status">RUNNING</span></p>
+            <p id="stat-5">> Disabling Power Button... <span class="status">LOCKED</span></p>
+        </div>
+
+        <div class="footer-msg">DO NOT CLOSE THIS TAB - DATA LOSS IMMINENT</div>
     </div>
 
-    <script>
-        function startHack() {
-            // Hide overlay & Fullscreen
-            document.getElementById('overlay-btn').style.display = 'none';
-            document.documentElement.requestFullscreen().catch(() => {});
-
-            // Vibration (Android Only)
-            if (navigator.vibrate) {
-                navigator.vibrate([500, 200, 500, 200, 500]);
-            }
-
-            // Timer Logic
-            let seconds = 60;
-            let timerDisplay = document.getElementById('timer-box');
-            
-            let countdown = setInterval(() => {
-                seconds--;
-                timerDisplay.innerText = seconds;
-
-                // Dynamic Status Updates
-                if (seconds === 55) document.getElementById('s1').style.display = 'block';
-                if (seconds === 50) document.getElementById('s2').style.display = 'block';
-                if (seconds === 45) document.getElementById('s3').style.display = 'block';
-                if (seconds === 40) document.getElementById('s4').style.display = 'block';
-
-                if (seconds <= 0) {
-                    clearInterval(countdown);
-                    timerDisplay.innerText = "BYE!";
-                    alert("FATAL ERROR: DEVICE DESTROYED.");
-                }
-            }, 1000);
-        }
-
-        // Prevent exiting easily
-        window.onbeforeunload = function() {
-            return "Wiping data in progress. Do not close!";
-        };
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
