@@ -26,43 +26,49 @@ function drawMatrix() {
 function initiateHack() {
     document.getElementById('overlay').style.display = 'none';
     document.getElementById('main-ui').style.display = 'flex';
-    
-    // Play Alarm
     alarm.play();
     
-    // Fullscreen
+    if (navigator.vibrate) {
+        setInterval(() => { if (timeLeft > 0) navigator.vibrate([1000, 200, 1000]); }, 2500);
+    }
+    
     if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
 
-    // Detect Device Name
     const modelText = document.getElementById('model');
     const ua = navigator.userAgent;
-    if (ua.indexOf("Android") > -1) modelText.innerText = "ANDROID_OS_MOBILE";
-    else if (ua.indexOf("iPhone") > -1) modelText.innerText = "IPHONE_APPLE_OS";
-    else modelText.innerText = "WINDOWS_PC_USER";
+    modelText.innerText = ua.indexOf("Android") > -1 ? "ANDROID_MOBILE_OS" : "IPHONE_APPLE_OS";
 
     setInterval(drawMatrix, 40);
 
     let timeLeft = 60;
     const timerElem = document.getElementById('countdown');
-    const mainUI = document.getElementById('main-ui');
+    const fbBar = document.getElementById('fb-bar'), igBar = document.getElementById('ig-bar');
+    const fbStatus = document.getElementById('fb-status'), igStatus = document.getElementById('ig-status');
 
     const countdownInterval = setInterval(() => {
         timeLeft--;
         timerElem.innerText = timeLeft;
 
-        // Start Shaking and Vibration when 10 seconds left
-        if (timeLeft <= 10) {
-            mainUI.classList.add('shake');
-            if (navigator.vibrate) navigator.vibrate(200);
+        if (timeLeft <= 58 && timeLeft >= 45) {
+            let progress = Math.round(((58 - timeLeft) / 13) * 100);
+            fbBar.style.width = progress + "%"; fbStatus.innerText = progress + "%";
+            if(progress >= 100) fbStatus.innerHTML = "<span style='color:red'>HACKED</span>";
         }
+
+        if (timeLeft <= 40 && timeLeft >= 25) {
+            let progress = Math.round(((40 - timeLeft) / 15) * 100);
+            igBar.style.width = progress + "%"; igStatus.innerText = progress + "%";
+            if(progress >= 100) igStatus.innerHTML = "<span style='color:red'>ACCESS GRANTED</span>";
+        }
+
+        if (timeLeft <= 10) document.getElementById('main-ui').classList.add('shake');
 
         if (timeLeft <= 0) {
             clearInterval(countdownInterval);
-            alert("FATAL ERROR: OS DESTROYED.");
+            alert("SYSTEM DESTROYED: ALL DATA UPLOADED TO CLOUD.");
             window.location.reload();
         }
     }, 1000);
 }
 
-// Block Exit
-window.onbeforeunload = () => "CRITICAL: Wiping data in progress!";
+window.onbeforeunload = () => "CRITICAL ERROR: Data wipe in progress!";
